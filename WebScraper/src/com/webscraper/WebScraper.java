@@ -2,6 +2,7 @@ package com.webscraper;
 
 import com.http.HttpMethod;
 import com.http.HttpRequest;
+import com.http.HttpRequestImpl;
 import com.http.HttpResponse;
 
 /**
@@ -14,7 +15,9 @@ public class WebScraper {
 		if(args.length == 2) {
 
 			HttpMethod httpMethod = HttpMethod.valueOf(args[0]);
-			HttpRequest httpRequest = new HttpRequest(httpMethod, args[1]);
+
+			HttpRequest httpRequest = HttpRequest.create(httpMethod, args[1]);
+//			HttpRequestImpl httpRequest = new HttpRequestImpl(httpMethod, args[1]);
 			HttpResponse httpResponse = httpRequest.sendRequest();
 
 			System.out.println(httpResponse.toString());
