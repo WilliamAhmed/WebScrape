@@ -4,13 +4,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
+ * The type Http request proxy.
+ *
  * @author WilliamAhmed
- * @since 11/09/2018
+ * @since 11 /09/2018
  */
 public class HttpRequestProxy implements HttpRequest{
 
 	private final HttpRequest target;
 
+	/**
+	 * Instantiates a new Http request proxy.
+	 *
+	 * @param target the target
+	 */
 	public HttpRequestProxy(HttpRequest target) {
 		this.target = target;
 	}
@@ -30,6 +37,13 @@ public class HttpRequestProxy implements HttpRequest{
 		target.setHttpMethod(httpMethod);
 	}
 
+	/**
+	 * Create http request http request.
+	 *
+	 * @param httpMethod the http method
+	 * @param url        the url
+	 * @return the http request
+	 */
 	public HttpRequest createHttpRequest(HttpMethod httpMethod, String url) {
 		url = normalizeUrl(url);
 		setHttpMethod(httpMethod);

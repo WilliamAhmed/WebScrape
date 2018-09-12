@@ -10,8 +10,10 @@ import java.net.URLConnection;
 import java.util.Date;
 
 /**
+ * The type Http request.
+ *
  * @author WilliamAhmed
- * @since 11/09/2018
+ * @since 11 /09/2018
  */
 public class HttpRequestImpl implements HttpRequest{
 
@@ -20,6 +22,9 @@ public class HttpRequestImpl implements HttpRequest{
 	private HttpMethod httpMethod;
 
 
+	/**
+	 * Instantiates a new Http request.
+	 */
 	public HttpRequestImpl() {
 	}
 
