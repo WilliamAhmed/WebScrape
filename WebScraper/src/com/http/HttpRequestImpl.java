@@ -1,13 +1,14 @@
 package com.http;
 
-import java.io.BufferedReader;
+import com.exception.RequiredDataMissingException;
+import com.reader.WebScraperInputStreamReader;
+import com.util.ValidationUtil;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Date;
+import java.util.Map;
 
 /**
  * The type Http request.
@@ -20,7 +21,7 @@ public class HttpRequestImpl implements HttpRequest{
 	private HttpURLConnection httpURLConnection;
 	private URL connectionUrl;
 	private HttpMethod httpMethod;
-
+	private HttpRequestHeaders requestHeaders;
 
 	/**
 	 * Instantiates a new Http request.
@@ -29,31 +30,27 @@ public class HttpRequestImpl implements HttpRequest{
 	}
 
 	public HttpResponse sendRequest() {
-
 		HttpResponse httpResponse = null;
 
-		if(connectionUrl != null) {
-			try {
+		try {
+			ValidationUtil.validateNotNull(httpMethod);
+			ValidationUtil.validateNotNull(connectionUrl);
 
-				URLConnection urlConnection = connectionUrl.openConnection();
-				httpURLConnection = (HttpURLConnection) urlConnection;
+			URLConnection urlConnection = connectionUrl.openConnection();
 
-				httpURLConnection.setRequestMethod(httpMethod.name());
+			httpURLConnection = (HttpURLConnection) urlConnection;
+			httpURLConnection.setRequestMethod(httpMethod.name());
 
-				httpURLConnection.setRequestProperty("Accept", "text/html");
-				httpURLConnection.setRequestProperty("Accept-Language", "en");
-				httpURLConnection.setRequestProperty("Date", new Date().toString());
-				httpURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:35.0) Gecko/20100101 Firefox/35.0");
+			populateHttpConnectionRequestProperties();
 
-				int responseCode = httpURLConnection.getResponseCode();
-				String responseBody = retrieveHttpResponseBody(httpURLConnection.getInputStream());
+			httpResponse = buildHttpResponse(httpURLConnection.getResponseCode(), WebScraperInputStreamReader.read(httpURLConnection.getInputStream()));
 
-				httpResponse = buildHttpResponse(responseCode, responseBody);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RequiredDataMissingException e) {
+			e.printStackTrace();
 		}
+
 
 		return httpResponse;
 	}
@@ -68,34 +65,23 @@ public class HttpRequestImpl implements HttpRequest{
 		this.httpMethod = httpMethod;
 	}
 
-	private String retrieveHttpResponseBody(InputStream responseInputStream) {
-
-		InputStreamReader inputStreamReader = new InputStreamReader(responseInputStream);
-		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		try {
-
-			while((inputLine = bufferedReader.readLine()) != null) {
-				response.append(inputLine);
-			}
-
-			bufferedReader.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return response.toString();
-
+	@Override
+	public void setHttpRequestHeaders(HttpRequestHeaders requestHeaders) {
+		this.requestHeaders = requestHeaders;
 	}
+
 
 	private HttpResponse buildHttpResponse(int httpResponseCode, String responseBody) {
-		return new HttpResponse(httpResponseCode, responseBody);
+		return HttpResponse.create(httpResponseCode, responseBody);
 	}
 
+	private void populateHttpConnectionRequestProperties() {
+		if (this.requestHeaders != null && this.connectionUrl != null) {
 
+			for (Map.Entry<String, String> requestHeader : this.requestHeaders.getHeaders().entrySet()) {
+				httpURLConnection.setRequestProperty(requestHeader.getKey(), requestHeader.getValue());
+			}
 
+		}
+	}
 }

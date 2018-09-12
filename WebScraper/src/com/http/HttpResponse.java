@@ -1,41 +1,33 @@
 package com.http;
 
 /**
- * The type Http response.
+ * The interface Http response.
  *
  * @author WilliamAhmed
- * @since 11 /09/2018
+ * @since 12 /09/2018
  */
-public class HttpResponse {
-
-	private HttpResponseCode httpResponseCode;
-	private String responseBody;
+public interface HttpResponse {
 
 	/**
-	 * Instantiates a new Http response.
+	 * Create http response.
 	 *
-	 * @param httpResponseCode the http response code
-	 * @param responseBody     the response body
+	 * @param code         the code
+	 * @param responseBody the response body
+	 * @return the http response
 	 */
-	public HttpResponse(int httpResponseCode, String responseBody) {
-		this.httpResponseCode = HttpResponseCode.getHttpResponseCodeForIntegerCode(httpResponseCode);
-		this.responseBody = responseBody;
+	static HttpResponse create(int code, String responseBody) {
+		return new HttpResponseImpl(code, responseBody);
 	}
 
 	/**
-	 * Instantiates a new Http response.
+	 * Create http response.
 	 *
-	 * @param httpResponseCode the http response code
-	 * @param responseBody     the response body
+	 * @param code         the code
+	 * @param responseBody the response body
+	 * @return the http response
 	 */
-	public HttpResponse(HttpResponseCode httpResponseCode, String responseBody) {
-		this.httpResponseCode = httpResponseCode;
-		this.responseBody = responseBody;
+	static HttpResponse create(HttpResponseCode code, String responseBody) {
+		return new HttpResponseImpl(code, responseBody);
 	}
 
-	public String toString() {
-		return  "Response Code: " + httpResponseCode.getCode() + " " + httpResponseCode.getCodeDescription() + "\n" +
-				"Response Body: \n" +
-				responseBody;
-	}
 }

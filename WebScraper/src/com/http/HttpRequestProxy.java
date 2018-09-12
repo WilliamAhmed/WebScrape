@@ -37,6 +37,11 @@ public class HttpRequestProxy implements HttpRequest{
 		target.setHttpMethod(httpMethod);
 	}
 
+	@Override
+	public void setHttpRequestHeaders(HttpRequestHeaders requestHeaders) {
+		target.setHttpRequestHeaders(requestHeaders);
+	}
+
 	/**
 	 * Create http request http request.
 	 *

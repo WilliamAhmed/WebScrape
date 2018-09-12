@@ -1,16 +1,20 @@
 package com.webscraper;
 
-import com.http.HttpMethod;
-import com.http.HttpRequest;
-import com.http.HttpRequestImpl;
-import com.http.HttpResponse;
+import com.http.*;
 
 /**
+ * The type Web scraper.
+ *
  * @author WilliamAhmed
- * @since 11/09/2018
+ * @since 11 /09/2018
  */
 public class WebScraper {
 
+	/**
+	 * The entry point of application.
+	 *
+	 * @param args the input arguments
+	 */
 	public static void main(String[] args) {
 		if(args.length == 2) {
 

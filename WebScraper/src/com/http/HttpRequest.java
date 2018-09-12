@@ -32,6 +32,13 @@ public interface HttpRequest {
 	void setHttpMethod(HttpMethod httpMethod);
 
 	/**
+	 * Sets http request headers.
+	 *
+	 * @param requestHeaders the request headers
+	 */
+	void setHttpRequestHeaders(HttpRequestHeaders requestHeaders);
+
+	/**
 	 * Create http request.
 	 *
 	 * @param httpMethod the http method
