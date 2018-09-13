@@ -1,4 +1,4 @@
-package com.http.response;
+package com.net.http.response;
 
 /**
  * The type Http response.

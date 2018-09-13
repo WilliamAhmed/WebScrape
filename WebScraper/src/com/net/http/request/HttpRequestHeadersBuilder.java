@@ -1,4 +1,4 @@
-package com.http.request;
+package com.net.http.request;
 
 import java.util.Map;
 import java.util.TreeMap;

@@ -1,4 +1,4 @@
-package com.http.request;
+package com.net.http.request;
 
 /**
  * The enum Http method.

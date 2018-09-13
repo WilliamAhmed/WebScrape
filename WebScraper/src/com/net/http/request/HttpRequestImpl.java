@@ -1,8 +1,8 @@
-package com.http.request;
+package com.net.http.request;
 
 import com.exception.RequiredDataMissingException;
-import com.http.response.HttpResponse;
-import com.reader.WebScraperInputStreamReader;
+import com.net.http.response.HttpResponse;
+import com.io.reader.WebScraperInputStreamReader;
 import com.util.ValidationUtil;
 
 import java.io.IOException;

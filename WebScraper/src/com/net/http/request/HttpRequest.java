@@ -1,6 +1,6 @@
-package com.http.request;
+package com.net.http.request;
 
-import com.http.response.HttpResponse;
+import com.net.http.response.HttpResponse;
 
 import java.net.URL;
 

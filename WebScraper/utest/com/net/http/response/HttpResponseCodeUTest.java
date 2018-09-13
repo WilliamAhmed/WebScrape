@@ -1,6 +1,5 @@
-package com.http.response;
+package com.net.http.response;
 
-import com.http.response.HttpResponseCode;
 import org.junit.Before;
 import org.junit.Test;
 
