@@ -1,4 +1,6 @@
-package com.http;
+package com.http.request;
+
+import com.http.response.HttpResponse;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,8 +35,8 @@ public class HttpRequestProxy implements HttpRequest{
 	}
 
 	@Override
-	public void setHttpMethod(HttpMethod httpMethod) {
-		target.setHttpMethod(httpMethod);
+	public void setHttpRequestMethod(HttpRequestMethod httpRequestMethod) {
+		target.setHttpRequestMethod(httpRequestMethod);
 	}
 
 	@Override
@@ -45,13 +47,13 @@ public class HttpRequestProxy implements HttpRequest{
 	/**
 	 * Create http request http request.
 	 *
-	 * @param httpMethod the http method
+	 * @param httpRequestMethod the http method
 	 * @param url        the url
 	 * @return the http request
 	 */
-	public HttpRequest createHttpRequest(HttpMethod httpMethod, String url) {
+	HttpRequest createHttpRequest(HttpRequestMethod httpRequestMethod, String url) {
 		url = normalizeUrl(url);
-		setHttpMethod(httpMethod);
+		setHttpRequestMethod(httpRequestMethod);
 
 		try {
 			URL urlObj = new URL(url);

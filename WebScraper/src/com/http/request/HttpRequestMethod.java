@@ -1,4 +1,4 @@
-package com.http;
+package com.http.request;
 
 /**
  * The enum Http method.
@@ -6,7 +6,7 @@ package com.http;
  * @author WilliamAhmed
  * @since 11 /09/2018
  */
-public enum HttpMethod {
+public enum HttpRequestMethod {
 
 	/**
 	 * Get http method.

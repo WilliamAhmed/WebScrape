@@ -1,6 +1,7 @@
-package com.http;
+package com.http.request;
 
 import com.exception.RequiredDataMissingException;
+import com.http.response.HttpResponse;
 import com.reader.WebScraperInputStreamReader;
 import com.util.ValidationUtil;
 
@@ -20,7 +21,7 @@ public class HttpRequestImpl implements HttpRequest{
 
 	private HttpURLConnection httpURLConnection;
 	private URL connectionUrl;
-	private HttpMethod httpMethod;
+	private HttpRequestMethod httpRequestMethod;
 	private HttpRequestHeaders requestHeaders;
 
 	/**
@@ -33,13 +34,13 @@ public class HttpRequestImpl implements HttpRequest{
 		HttpResponse httpResponse = null;
 
 		try {
-			ValidationUtil.validateNotNull(httpMethod);
+			ValidationUtil.validateNotNull(httpRequestMethod);
 			ValidationUtil.validateNotNull(connectionUrl);
 
 			URLConnection urlConnection = connectionUrl.openConnection();
 
 			httpURLConnection = (HttpURLConnection) urlConnection;
-			httpURLConnection.setRequestMethod(httpMethod.name());
+			httpURLConnection.setRequestMethod(httpRequestMethod.name());
 
 			populateHttpConnectionRequestProperties();
 
@@ -61,8 +62,8 @@ public class HttpRequestImpl implements HttpRequest{
 	}
 
 	@Override
-	public void setHttpMethod(HttpMethod httpMethod) {
-		this.httpMethod = httpMethod;
+	public void setHttpRequestMethod(HttpRequestMethod httpRequestMethod) {
+		this.httpRequestMethod = httpRequestMethod;
 	}
 
 	@Override

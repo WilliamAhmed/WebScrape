@@ -1,4 +1,4 @@
-package com.http;
+package com.http.request;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -37,6 +37,10 @@ public class HttpRequestHeaders {
 	 */
 	public Map<String, String> getHeaders() {
 		return requestHeaders;
+	}
+
+	public void setHeaders(Map<String, String> headers) {
+		this.requestHeaders = headers;
 	}
 
 	public String toString() {

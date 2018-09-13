@@ -1,6 +1,10 @@
 package com.webscraper;
 
-import com.http.*;
+import com.http.request.HttpRequest;
+import com.http.request.HttpRequestHeaders;
+import com.http.request.HttpRequestHeadersBuilder;
+import com.http.request.HttpRequestMethod;
+import com.http.response.HttpResponse;
 
 /**
  * The type Web scraper.
@@ -18,10 +22,18 @@ public class WebScraper {
 	public static void main(String[] args) {
 		if(args.length == 2) {
 
-			HttpMethod httpMethod = HttpMethod.valueOf(args[0]);
+			HttpRequestMethod httpRequestMethod = HttpRequestMethod.valueOf(args[0]);
 
-			HttpRequest httpRequest = HttpRequest.create(httpMethod, args[1]);
-//			HttpRequestImpl httpRequest = new HttpRequestImpl(httpMethod, args[1]);
+			HttpRequest httpRequest = HttpRequest.create(httpRequestMethod, args[1]);
+
+			HttpRequestHeadersBuilder httpRequestHeadersBuilder = new HttpRequestHeadersBuilder();
+			httpRequestHeadersBuilder.addAcceptHeader("*/*");
+			httpRequestHeadersBuilder.addAcceptEncodingHeader("gzip");
+			httpRequestHeadersBuilder.addConnectionHeader("Keep-Alive");
+			httpRequestHeadersBuilder.addUserAgentHeader("Mozilla/4.0");
+
+			httpRequest.setHttpRequestHeaders(httpRequestHeadersBuilder.build());
+
 			HttpResponse httpResponse = httpRequest.sendRequest();
 
 			System.out.println(httpResponse.toString());

@@ -1,4 +1,4 @@
-package com.http;
+package com.http.response;
 
 /**
  * The enum Http response code.

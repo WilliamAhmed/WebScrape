@@ -1,4 +1,6 @@
-package com.http;
+package com.http.request;
+
+import com.http.response.HttpResponse;
 
 import java.net.URL;
 
@@ -27,9 +29,9 @@ public interface HttpRequest {
 	/**
 	 * Sets http method.
 	 *
-	 * @param httpMethod the http method
+	 * @param httpRequestMethod the http method
 	 */
-	void setHttpMethod(HttpMethod httpMethod);
+	void setHttpRequestMethod(HttpRequestMethod httpRequestMethod);
 
 	/**
 	 * Sets http request headers.
@@ -41,12 +43,12 @@ public interface HttpRequest {
 	/**
 	 * Create http request.
 	 *
-	 * @param httpMethod the http method
+	 * @param httpRequestMethod the http method
 	 * @param url        the url
 	 * @return the http request
 	 */
-	static HttpRequest create(HttpMethod httpMethod, String url) {
-		return new HttpRequestProxy(new HttpRequestImpl()).createHttpRequest(httpMethod, url);
+	static HttpRequest create(HttpRequestMethod httpRequestMethod, String url) {
+		return new HttpRequestProxy(new HttpRequestImpl()).createHttpRequest(httpRequestMethod, url);
 
 	}
 }
