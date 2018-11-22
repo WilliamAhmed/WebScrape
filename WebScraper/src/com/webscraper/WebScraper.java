@@ -22,12 +22,13 @@ public class WebScraper {
 		if(args.length == 2) {
 
 			HttpRequestMethod httpRequestMethod = HttpRequestMethod.valueOf(args[0]);
-
 			HttpRequest httpRequest = HttpRequest.create(httpRequestMethod, args[1]);
 
+			System.out.printf("\n%s %s \n\n", args[0], args[1]);
+
 			HttpRequestHeadersBuilder httpRequestHeadersBuilder = new HttpRequestHeadersBuilder();
-			httpRequestHeadersBuilder.addAcceptHeader("*/*")
-									 .addAcceptEncodingHeader("gzip")
+			httpRequestHeadersBuilder.addAcceptHeader("text/html")
+									 .addAcceptEncodingHeader("*")
 									 .addConnectionHeader("Keep-Alive")
 									 .addUserAgentHeader("Mozilla/4.0");
 
@@ -35,7 +36,11 @@ public class WebScraper {
 
 			HttpResponse httpResponse = httpRequest.sendRequest();
 
-			System.out.println(httpResponse.toString());
+			System.out.println(httpResponse.getResponseBody());
+
+
+
+//			System.out.println(httpResponse.toString());
 		}
 	}
 }

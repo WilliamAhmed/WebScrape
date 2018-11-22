@@ -30,4 +30,8 @@ public interface HttpResponse {
 		return new HttpResponseImpl(code, responseBody);
 	}
 
+	String getResponseBody();
+
+	HttpResponseCode getHttpResponseCode();
+
 }

@@ -38,4 +38,14 @@ public class HttpResponseImpl implements HttpResponse {
 				"Response Body: \n" +
 				responseBody;
 	}
+
+	@Override
+	public String getResponseBody() {
+		return responseBody;
+	}
+
+	@Override
+	public HttpResponseCode getHttpResponseCode() {
+		return httpResponseCode;
+	}
 }
